@@ -61,7 +61,7 @@ available_skills() {
   if [ -n "$found" ]; then
     echo $found
   else
-    echo "paper-reader write-method-causally tool-first-determinism"
+    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment"
   fi
 }
 
@@ -78,14 +78,23 @@ install_one() {
   if [ -f "$SCRIPT_DIR/$name/SKILL.md" ]; then
     cp -R "$SCRIPT_DIR/$name/." "$dest/"
   else
-    if command -v curl >/dev/null 2>&1; then
-      curl -fsSL "$REPO_RAW_BASE/$name/SKILL.md" -o "$dest/SKILL.md"
-    elif command -v wget >/dev/null 2>&1; then
-      wget -qO "$dest/SKILL.md" "$REPO_RAW_BASE/$name/SKILL.md"
-    else
-      echo "error: curl or wget is required for remote install." >&2
-      exit 1
-    fi
+    files="SKILL.md"
+    case "$name" in
+      engineering-judgment)
+        files="$files references/resume.md references/project.md references/system-design.md"
+        ;;
+    esac
+    for file in $files; do
+      mkdir -p "$(dirname "$dest/$file")"
+      if command -v curl >/dev/null 2>&1; then
+        curl -fsSL "$REPO_RAW_BASE/$name/$file" -o "$dest/$file"
+      elif command -v wget >/dev/null 2>&1; then
+        wget -qO "$dest/$file" "$REPO_RAW_BASE/$name/$file"
+      else
+        echo "error: curl or wget is required for remote install." >&2
+        exit 1
+      fi
+    done
   fi
   echo "installed: $name -> $dest"
 }

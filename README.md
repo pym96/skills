@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`engineering-judgment`](engineering-judgment/SKILL.md) | Turn technical work into persuasive resume bullets, project deep dives, and system design answers through problem value, trade-offs, mechanisms, and evidence. |
 | [`paper-reader`](paper-reader/SKILL.md) | Review paper drafts through explicit reader roles: elevator-pitch, logic-gap, counter-argument, signpost-check, engineer-translation. |
 | [`write-method-causally`](write-method-causally/SKILL.md) | Rewrite method sections as causal narratives — separate How from Why, turn component inventories into research prose. |
 | [`tool-first-determinism`](tool-first-determinism/SKILL.md) | Enforce tool-first handling for deterministic tasks (counting, arithmetic, string ops) instead of long reasoning. |
@@ -22,6 +23,9 @@ and it becomes available to every agent that reads this repo.
 ```sh
 # Install one skill into your agent's skills directory
 ./install.sh paper-reader
+
+# Install engineering judgment, including its three scenario references
+./install.sh engineering-judgment
 
 # Install all skills
 ./install.sh --all
