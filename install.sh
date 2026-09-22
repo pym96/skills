@@ -61,7 +61,7 @@ available_skills() {
   if [ -n "$found" ]; then
     echo $found
   else
-    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment"
+    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment project-market-fit"
   fi
 }
 
@@ -82,6 +82,9 @@ install_one() {
     case "$name" in
       engineering-judgment)
         files="$files references/resume.md references/project.md references/system-design.md"
+        ;;
+      project-market-fit)
+        files="$files references/research.md references/improvement.md"
         ;;
     esac
     for file in $files; do

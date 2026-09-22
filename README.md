@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`project-market-fit`](project-market-fit/SKILL.md) | Match existing projects to hiring needs, research relevance gaps, and prioritize the smallest useful improvement from feedback. |
 | [`engineering-judgment`](engineering-judgment/SKILL.md) | Turn technical work into persuasive resume bullets, project deep dives, and system design answers through problem value, trade-offs, mechanisms, and evidence. |
 | [`paper-reader`](paper-reader/SKILL.md) | Review paper drafts through explicit reader roles: elevator-pitch, logic-gap, counter-argument, signpost-check, engineer-translation. |
 | [`write-method-causally`](write-method-causally/SKILL.md) | Rewrite method sections as causal narratives — separate How from Why, turn component inventories into research prose. |
@@ -27,6 +28,9 @@ and it becomes available to every agent that reads this repo.
 # Install engineering judgment, including its three scenario references
 ./install.sh engineering-judgment
 
+# Install project-market fit, including research and improvement references
+./install.sh project-market-fit
+
 # Install all skills
 ./install.sh --all
 
@@ -36,6 +40,11 @@ and it becomes available to every agent that reads this repo.
 
 Or clone and symlink the folders you want into `~/.claude/skills`,
 `~/.codex/skills`, or any agent skills directory.
+
+`project-market-fit` uses `engineering-judgment` for technical analysis and
+resume writing, and the separately installed `grilling` skill for interactive
+questions. Install `engineering-judgment` with the command above; if either
+dependency is unavailable, the skill reports it and follows its limited fallback.
 
 ## Layout
 
