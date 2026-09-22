@@ -1,0 +1,4 @@
+interface:
+  display_name: "Causal Method Writing"
+  short_description: "Turn method components into causal scientific prose"
+  default_prompt: "Use $write-method-causally to extract the How and Why of this method and rewrite it as a causal research narrative."
