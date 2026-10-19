@@ -61,7 +61,7 @@ available_skills() {
   if [ -n "$found" ]; then
     echo $found
   else
-    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment project-market-fit"
+    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment project-market-fit regression-guard"
   fi
 }
 

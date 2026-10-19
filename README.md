@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`regression-guard`](regression-guard/SKILL.md) | Verify fixes with red/green evidence, retain behavioral regression tests, and integrate checks into existing CI. |
 | [`project-market-fit`](project-market-fit/SKILL.md) | Match existing projects to hiring needs, research relevance gaps, and prioritize the smallest useful improvement from feedback. |
 | [`engineering-judgment`](engineering-judgment/SKILL.md) | Turn technical work into persuasive resume bullets, project deep dives, and system design answers through problem value, trade-offs, mechanisms, and evidence. |
 | [`paper-reader`](paper-reader/SKILL.md) | Review paper drafts through explicit reader roles: elevator-pitch, logic-gap, counter-argument, signpost-check, engineer-translation. |
@@ -30,6 +31,9 @@ and it becomes available to every agent that reads this repo.
 
 # Install project-market fit, including research and improvement references
 ./install.sh project-market-fit
+
+# Install bug-fix verification and regression workflow
+./install.sh regression-guard
 
 # Install all skills
 ./install.sh --all
