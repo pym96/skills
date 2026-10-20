@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Coordinate builder/reviewer handoffs and bounded progress using executable acceptance evidence. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
 | [`regression-guard`](regression-guard/SKILL.md) | Verify fixes with red/green evidence, retain behavioral regression tests, and integrate checks into existing CI. |
 | [`project-market-fit`](project-market-fit/SKILL.md) | Match existing projects to hiring needs, research relevance gaps, and prioritize the smallest useful improvement from feedback. |
@@ -32,6 +33,9 @@ and it becomes available to every agent that reads this repo.
 
 # Install project-market fit, including research and improvement references
 ./install.sh project-market-fit
+
+# Install evidence-based multi-agent acceptance
+./install.sh evidence-gated-delivery
 
 # Install pytest test design and fixture isolation guidance
 ./install.sh pytest-test-design
@@ -53,6 +57,17 @@ Or clone and symlink the folders you want into `~/.claude/skills`,
 resume writing, and the separately installed `grilling` skill for interactive
 questions. Install `engineering-judgment` with the command above; if either
 dependency is unavailable, the skill reports it and follows its limited fallback.
+
+## Composing delivery and testing
+
+`evidence-gated-delivery` defines when a candidate can advance and what independent
+verification must establish. It uses `regression-guard` for bug-fix evidence and
+`pytest-test-design` for Python test structure. Install those skills when needed;
+missing guidance does not count as successful verification.
+
+For explicitly requested periodic work, it uses a separately installed `loop`
+skill. This repository does not supply a scheduler or start recurring work on
+installation. Project role, permission, and human approval rules remain in force.
 
 ## Layout
 
