@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`systems-design-reasoning`](systems-design-reasoning/SKILL.md) | Analyze resource sharing, enforced boundaries, composition, and abstraction through constraints and whole-system trade-offs. |
 | [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Coordinate builder/reviewer handoffs and bounded progress using executable acceptance evidence. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
 | [`regression-guard`](regression-guard/SKILL.md) | Verify fixes with red/green evidence, retain behavioral regression tests, and integrate checks into existing CI. |
@@ -33,6 +34,9 @@ and it becomes available to every agent that reads this repo.
 
 # Install project-market fit, including research and improvement references
 ./install.sh project-market-fit
+
+# Install systems architecture reasoning
+./install.sh systems-design-reasoning
 
 # Install evidence-based multi-agent acceptance
 ./install.sh evidence-gated-delivery
@@ -57,6 +61,10 @@ Or clone and symlink the folders you want into `~/.claude/skills`,
 resume writing, and the separately installed `grilling` skill for interactive
 questions. Install `engineering-judgment` with the command above; if either
 dependency is unavailable, the skill reports it and follows its limited fallback.
+
+`systems-design-reasoning` analyzes architecture choices and their mechanisms.
+`engineering-judgment` helps express technical work for projects, resumes, and
+interviews; neither skill requires the other.
 
 ## Composing delivery and testing
 
