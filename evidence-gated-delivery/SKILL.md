@@ -9,6 +9,28 @@ Advance work on observed evidence, not agent confidence. Reviews can report none
 
 This skill defines a workflow, not a scheduler or an enforced security boundary. Read the project's role and approval rules first. It does not grant permission to dispatch agents, edit products, change acceptance criteria, merge, or publish.
 
+## Invocation and orchestration
+
+Accept `/evidence-gated-delivery [interval] [duration] [best effort] [task]` or the equivalent `$evidence-gated-delivery` prompt. For example, `/evidence-gated-delivery 5m 2h best effort` requests one Master-controlled loop checking every five minutes for at most two hours. The command spelling is a host-dependent prompt convention, not a scheduler implementation.
+
+Bind an omitted task to the current explicit, authorized task. If none exists or several are ambiguous, ask which task before dispatch. Describing, editing, or installing this skill never activates it. Timing arguments explicitly request recurring execution; without them or another recurring request, use the evidence workflow without starting a loop. Resolve omitted timing through the installed `loop` skill.
+
+`best effort` means advance autonomously within authorized scope and budget, including bounded repair attempts. It never waives acceptance criteria, role separation, missing evidence, or human approvals. At the deadline, stop advancement and return the partial candidate, verified results, unresolved issues, and next action. Retries and session recovery do not restart the budget.
+
+For the recurring workflow, load the installed `loop` skill and identify actual dispatch capabilities before activation. When using Orca, load `orchestration` for its transport and lifecycle rules. Knowing a session ID is not itself a dispatch mechanism. If a required capability is missing, report it and prepare a handoff; do not silently substitute a one-shot or self-reviewed run. Only proceed with such a fallback if the user accepts the changed workflow.
+
+| Role | Responsibility | Boundary |
+|---|---|---|
+| Master | Scope, criteria, budget, dispatch, state transitions, and authorized integration | Does not build or independently verify the candidate |
+| Working | Produce the candidate, self-check, and hand off raw evidence | Does not declare independent acceptance |
+| Regulator | Independently inspect the identified candidate against original criteria | Does not repair the candidate under review |
+
+Preserve project roles and WorkOrder requirements. This invocation cannot turn a Researcher or Working session into Master; report the mismatch and hand off to an authorized coordinator. Bind real role/session IDs and supply original requirements directly to both workers. Use existing assignment templates; otherwise include objective, baseline, allowed paths/actions, artifact, criteria, budget, and handoff destination. Summarize the scope and output to the human before dispatch.
+
+Match verification to the deliverable: executable checks for code, original-source checks and counterevidence for research, factual and brief compliance checks for writing. Load relevant domain guidance only as needed. Regulator can prepare from criteria while Working runs, but reviews only the immutable handed-off candidate. Independent review increases confidence; it does not guarantee correctness.
+
+**Done when:** task, role authority, actual capabilities, interval/deadline, and expected evidence are explicit, or a missing prerequisite is reported without starting the workflow.
+
 ## 1. Bind the task to observable criteria
 
 Read the authorized task, baseline, scope, role assignments, and budget. Use the project's existing records rather than creating a parallel source of truth.
@@ -41,7 +63,7 @@ Record each criterion as pass, fail, or unverified with command, candidate ident
 
 ## 4. Use a bounded loop only when requested
 
-If recurring execution is authorized, load the installed `loop` skill for scheduling, cadence, budget, and cancellation. Do not copy its scheduler implementation into this workflow. If unavailable, perform only an authorized one-shot check and report that no recurring execution was started.
+For authorized recurring execution, use the installed `loop` skill for scheduling, cadence, budget, and cancellation. Use one Master loop, not one loop per worker. Process completion events promptly when supported. Do not copy scheduler implementation into this workflow; missing capabilities follow the activation rules above.
 
 Each tick reads current state and evidence before taking at most the next authorized transition:
 
@@ -55,13 +77,15 @@ Each tick reads current state and evidence before taking at most the next author
 | Missing evidence or conflicting observations | Investigate within budget or report the blocker; do not infer success |
 | Human decision required | Surface the concrete decision and stop active advancement; wait only if explicitly authorized |
 
-Persist candidate identity, active dispatch/run IDs, last observation, and next action in the authorized task record. Repeated ticks must not duplicate dispatches, rerun unchanged expensive suites without cause, or re-ask reviewers until one says yes. A timeout, silence, or majority vote cannot replace a missing gate. Stop at completion, cancellation, or the configured budget; report incomplete work without extending authorization.
+Persist role IDs, candidate identity, criterion version, active dispatch/run IDs, original deadline, remaining budget, last observation, and next action in the authorized task record. On resume, reconcile actual workers and scheduling state before redispatch. Repeated ticks must not duplicate dispatches, rerun unchanged expensive suites without cause, or re-ask reviewers until one says yes. A timeout, silence, or majority vote cannot replace a missing gate. Stop at completion, cancellation, or the configured budget; report incomplete work without extending authorization.
 
 **Done when:** each transition has a recorded cause, no duplicate work was launched, and the actual loop status and stop condition are explicit.
 
 ## 5. Close on the verified identity
 
-Report the candidate identity, criterion outcomes, independent observations, remaining uncertainty, human gates, and whether scheduling is still active. A repair creates a new candidate; do not reuse an old verdict as acceptance of changed artifacts. Preserve failed evidence as well as successful reruns.
+Close the owned loop and settle or stop owned workers using available controls. Preserve user changes and evidence; clean up only task-owned resources. Report any operation whose termination cannot be confirmed.
+
+Report the candidate identity, criterion outcomes, independent observations, remaining uncertainty, human gates, and actual scheduling/worker status. A repair creates a new candidate; do not reuse an old verdict as acceptance of changed artifacts. Preserve failed evidence as well as successful reruns.
 
 Only the designated authority declares acceptance. Merge or publication is a separate authorized action, even when all checks pass. Do not claim runtime enforcement merely because these rules exist in Markdown.
 

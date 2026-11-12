@@ -13,9 +13,9 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
-| [`supervised-delivery`](supervised-delivery/SKILL.md) | User-invoked entrypoint for a bounded Master–Working–Regulator workflow using loop and evidence gates. |
+| [`supervised-delivery`](supervised-delivery/SKILL.md) | Compatibility entrypoint; use evidence-gated-delivery for the canonical workflow. |
 | [`systems-design-reasoning`](systems-design-reasoning/SKILL.md) | Analyze resource sharing, enforced boundaries, composition, and abstraction through constraints and whole-system trade-offs. |
-| [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Coordinate builder/reviewer handoffs and bounded progress using executable acceptance evidence. |
+| [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Master–Working–Regulator orchestration, bounded loop supervision, and independent evidence gates. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
 | [`regression-guard`](regression-guard/SKILL.md) | Verify fixes with red/green evidence, retain behavioral regression tests, and integrate checks into existing CI. |
 | [`project-market-fit`](project-market-fit/SKILL.md) | Match existing projects to hiring needs, research relevance gaps, and prioritize the smallest useful improvement from feedback. |
@@ -36,16 +36,12 @@ and it becomes available to every agent that reads this repo.
 # Install project-market fit, including research and improvement references
 ./install.sh project-market-fit
 
-# Install the collaboration entrypoint and its evidence workflow
-./install.sh supervised-delivery
+# Install the combined collaboration and evidence workflow
 ./install.sh evidence-gated-delivery
 # Also requires a separately installed loop skill and agent-dispatch capability.
 
 # Install systems architecture reasoning
 ./install.sh systems-design-reasoning
-
-# Install evidence-based multi-agent acceptance
-./install.sh evidence-gated-delivery
 
 # Install pytest test design and fixture isolation guidance
 ./install.sh pytest-test-design
@@ -74,13 +70,14 @@ interviews; neither skill requires the other.
 
 ## Composing delivery and testing
 
-Invoke `$supervised-delivery <task>` to explicitly select the three-role workflow.
-It requires `evidence-gated-delivery`, a separately installed `loop` skill, and
-actual agent-dispatch capabilities. Install the two repository skills as shown
-above; the installer does not resolve dependencies automatically. Missing core
-capabilities stop activation. Creating or installing the skill starts no workers
-or schedules and does not override project roles or approvals.
-
+Invoke `/evidence-gated-delivery 5m 2h best effort` to supervise the current
+explicit authorized task with Master, Working, and an independent Regulator.
+`5m` is the check interval; `2h` is the total time budget. `best effort` permits
+bounded progress and repair, not weaker acceptance. Add a task if none is bound.
+The recurring workflow requires a separately installed `loop` skill and actual
+agent-dispatch capabilities; missing capabilities stop activation. Installation
+starts no workers or schedules and does not override project roles or approvals.
+`supervised-delivery` remains only a compatibility entrypoint.
 
 `evidence-gated-delivery` defines when a candidate can advance and what independent
 verification must establish. It uses `regression-guard` for bug-fix evidence and
