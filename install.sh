@@ -61,7 +61,7 @@ available_skills() {
   if [ -n "$found" ]; then
     echo $found
   else
-    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment project-market-fit regression-guard pytest-test-design evidence-gated-delivery systems-design-reasoning"
+    echo "paper-reader write-method-causally tool-first-determinism engineering-judgment project-market-fit regression-guard pytest-test-design evidence-gated-delivery systems-design-reasoning supervised-delivery"
   fi
 }
 

@@ -13,6 +13,7 @@ and it becomes available to every agent that reads this repo.
 
 | Skill | What it does |
 |---|---|
+| [`supervised-delivery`](supervised-delivery/SKILL.md) | User-invoked entrypoint for a bounded Master–Working–Regulator workflow using loop and evidence gates. |
 | [`systems-design-reasoning`](systems-design-reasoning/SKILL.md) | Analyze resource sharing, enforced boundaries, composition, and abstraction through constraints and whole-system trade-offs. |
 | [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Coordinate builder/reviewer handoffs and bounded progress using executable acceptance evidence. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
@@ -34,6 +35,11 @@ and it becomes available to every agent that reads this repo.
 
 # Install project-market fit, including research and improvement references
 ./install.sh project-market-fit
+
+# Install the collaboration entrypoint and its evidence workflow
+./install.sh supervised-delivery
+./install.sh evidence-gated-delivery
+# Also requires a separately installed loop skill and agent-dispatch capability.
 
 # Install systems architecture reasoning
 ./install.sh systems-design-reasoning
@@ -67,6 +73,14 @@ dependency is unavailable, the skill reports it and follows its limited fallback
 interviews; neither skill requires the other.
 
 ## Composing delivery and testing
+
+Invoke `$supervised-delivery <task>` to explicitly select the three-role workflow.
+It requires `evidence-gated-delivery`, a separately installed `loop` skill, and
+actual agent-dispatch capabilities. Install the two repository skills as shown
+above; the installer does not resolve dependencies automatically. Missing core
+capabilities stop activation. Creating or installing the skill starts no workers
+or schedules and does not override project roles or approvals.
+
 
 `evidence-gated-delivery` defines when a candidate can advance and what independent
 verification must establish. It uses `regression-guard` for bug-fix evidence and
