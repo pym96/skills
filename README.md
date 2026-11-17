@@ -16,6 +16,7 @@ and it becomes available to every agent that reads this repo.
 | [`supervised-delivery`](supervised-delivery/SKILL.md) | Compatibility entrypoint; use evidence-gated-delivery for the canonical workflow. |
 | [`systems-design-reasoning`](systems-design-reasoning/SKILL.md) | Analyze resource sharing, enforced boundaries, composition, and abstraction through constraints and whole-system trade-offs. |
 | [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Master–Working–Regulator orchestration, bounded loop supervision, and independent evidence gates. |
+| [`executable-contracts`](executable-contracts/SKILL.md) | Turn recurring mistakes into API constraints, executable checks, runtime controls, or enforced delivery gates. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
 | [`regression-guard`](regression-guard/SKILL.md) | Verify fixes with red/green evidence, retain behavioral regression tests, and integrate checks into existing CI. |
 | [`project-market-fit`](project-market-fit/SKILL.md) | Match existing projects to hiring needs, research relevance gaps, and prioritize the smallest useful improvement from feedback. |
@@ -102,3 +103,5 @@ skills/
 
 This repo grows with actual usage: a skill earns its place here after proving
 useful in real work, not before.
+
+`executable-contracts` selects where a requirement should be enforced. It uses `pytest-test-design` for Python test structure and `regression-guard` for historical fix verification; it does not replace either skill or start a delivery workflow. Install it with `./install.sh executable-contracts`.
