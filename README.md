@@ -27,38 +27,65 @@ and it becomes available to every agent that reads this repo.
 
 ## Install
 
+With [Node.js](https://nodejs.org/) 22.20 or later and Git installed, run:
+
 ```sh
-# Install one skill into your agent's skills directory
-./install.sh paper-reader
-
-# Install engineering judgment, including its three scenario references
-./install.sh engineering-judgment
-
-# Install project-market fit, including research and improvement references
-./install.sh project-market-fit
-
-# Install the combined collaboration and evidence workflow
-./install.sh evidence-gated-delivery
-# Also requires a separately installed loop skill and agent-dispatch capability.
-
-# Install systems architecture reasoning
-./install.sh systems-design-reasoning
-
-# Install pytest test design and fixture isolation guidance
-./install.sh pytest-test-design
-
-# Install bug-fix verification and regression workflow
-./install.sh regression-guard
-
-# Install all skills
-./install.sh --all
-
-# Custom destination (default: $CODEX_HOME/skills or ~/.codex/skills)
-./install.sh tool-first-determinism --dest ~/.claude/skills
+npx skills@latest add pym96/skills
 ```
 
-Or clone and symlink the folders you want into `~/.claude/skills`,
-`~/.codex/skills`, or any agent skills directory.
+In an interactive terminal, choose the skills, target agents, project or global
+scope, and installation method in the prompts. When run inside a detected agent,
+the CLI can skip prompts; use the explicit commands below to select what to install. This uses the community [Skills CLI](https://github.com/vercel-labs/skills)
+from npm to fetch this GitHub repository; you do not need to clone it or install
+a separate package from this repo. npm may first ask permission to download the CLI.
+
+List available skills without installing:
+
+```sh
+npx skills@latest add pym96/skills --list
+```
+
+For a specific skill, these commands install into the current project without
+installer prompts (replace `engineering-judgment` with a name from the table):
+
+```sh
+# Codex
+npx skills@latest add pym96/skills --skill engineering-judgment --agent codex --yes
+
+# Claude Code
+npx skills@latest add pym96/skills --skill engineering-judgment --agent claude-code --yes
+```
+
+Add `--global` for a user-wide installation. To install every skill for one
+agent, use `--skill '*' --agent codex --yes` (or `--agent claude-code`).
+The quotes around `'*'` prevent shell expansion. The CLI's `--all` flag targets
+all supported agents, so use the explicit agent option above when you only want one.
+Bundled references are installed with each skill. Skills mentioned as dependencies
+in the sections below still need to be installed separately.
+
+Restart your agent after installation so it can discover the skills.
+See the [CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md)
+for more options. These commands were checked with Skills CLI 1.9.0; `@latest`
+tracks upstream releases.
+
+### Existing shell installer
+
+The original installer remains available for a local checkout. It requires a
+POSIX shell and copies skills to `$CODEX_HOME/skills` or `~/.codex/skills` by default:
+
+```sh
+git clone https://github.com/pym96/skills.git
+cd skills
+
+./install.sh engineering-judgment
+./install.sh --all
+
+# Custom destination, for example Claude Code
+./install.sh paper-reader --dest ~/.claude/skills
+```
+
+Existing destinations are skipped unless you add `--force`. You can also symlink
+the folders from your checkout into your agent's skills directory.
 
 `project-market-fit` uses `engineering-judgment` for technical analysis and
 resume writing, and the separately installed `grilling` skill for interactive
