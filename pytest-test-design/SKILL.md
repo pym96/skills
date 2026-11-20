@@ -7,6 +7,11 @@ description: Design or refactor Python tests around behavioral contracts, isolat
 
 Keep production behavior, test assertions, resource lifecycle, and runner configuration distinct. Separate files help organization; low coupling comes from testing stable contracts rather than private implementation details. High cohesion means each test or helper has one clear responsibility.
 
+If the question is whether a requirement belongs in a type, API, lint rule, test,
+runtime control, or delivery gate, use `executable-contracts` when available to
+choose that boundary first. Return here for pytest-specific design; routine Python
+test work does not require loading the general workflow.
+
 ## 1. Locate the contract and existing conventions
 
 - Read the affected production interface, nearby tests, pytest configuration, and applicable CI job before proposing structure.

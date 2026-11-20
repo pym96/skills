@@ -12,7 +12,12 @@ in the interface, checker, runtime, or delivery system that actually mediates th
 behavior. Work within the authorized repository and change scope; this skill does
 not grant permission to change security policy, branch protection, or production.
 
-## 1. Ground the contract in a concrete failure
+## 1. Ground the contract in the goal and a concrete failure
+
+Name the outcome being protected before selecting a checker. A green lint run or
+a completed checklist is process evidence, not the product goal. State how the
+proposed rule protects that outcome; reject rules with no relevant failure or
+explicit requirement behind them.
 
 Read the affected interface, implementation, existing checks, and relevant agent
 rule before proposing a new mechanism. Identify the observed mistake or requested
@@ -109,6 +114,21 @@ actual discovery, trigger filters, exit-code propagation, and required-check set
 within the authorized scope. Do not equate a workflow file, a passing local command,
 and an enforced remote gate.
 
+For a blocking check, trace the full chain: trigger → covered input → finding →
+failing exit/status → consumer that blocks the prohibited transition. Inspect
+severity settings, suppressions, ignored paths, swallowed exit codes, and bypasses.
+A warning-only linter is advisory; a failing command blocks only callers that honor
+its failure. State the enforcement boundary rather than claiming an absolute hard
+constraint. Verify the chain in a disposable or authorized environment; otherwise
+label the unobserved links unverified.
+
+Name the real trigger (local command, commit event, CI event, or runtime operation)
+and the feedback source used to detect missed violations or false positives. Link
+results to the candidate and configuration version. Do not add a recurring job or
+request a fresh approval when existing authorized automation already covers it.
+Changes to goals, accepted compatibility, budget, or authority require the applicable
+decision process; routine corrections inside those boundaries do not.
+
 Report only the relevant states: **implemented**, **executed**, and **enforced**,
 with evidence for each claimed state. Include the contract, mechanism, negative and
 positive results, and residual judgment. Keep execution records in existing project
@@ -130,3 +150,10 @@ Read another skill only when its branch is needed:
 If a referenced skill is unavailable, report the missing guidance and use existing
 repository conventions within scope. Missing guidance never establishes a passed
 check or authorizes bypassing a required review.
+
+## Design reference
+
+[Lauren Tan, Automate Anything with Grok Bot](https://x.com/poteto/status/2123159537016533493)
+separates goals from processes and discusses feedback and execution triggers. Those
+ideas inform steps 1 and 5; the enforcement-chain guidance is this skill's engineering
+synthesis, not a claim that the article specifies lint or CI policy.
