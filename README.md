@@ -15,6 +15,7 @@ and it becomes available to every agent that reads this repo.
 |---|---|
 | [`supervised-delivery`](supervised-delivery/SKILL.md) | Compatibility entrypoint; use evidence-gated-delivery for the canonical workflow. |
 | [`systems-design-reasoning`](systems-design-reasoning/SKILL.md) | Analyze resource sharing, enforced boundaries, composition, and abstraction through constraints and whole-system trade-offs. |
+| [`optimization-review`](optimization-review/SKILL.md) | Decide whether to replace an existing implementation by checking what callers can observe and comparing the full cost under the target workload. |
 | [`evidence-gated-delivery`](evidence-gated-delivery/SKILL.md) | Master–Working–Regulator orchestration, bounded loop supervision, and independent evidence gates. |
 | [`executable-contracts`](executable-contracts/SKILL.md) | Turn recurring mistakes into API constraints, executable checks, runtime controls, or enforced delivery gates. |
 | [`pytest-test-design`](pytest-test-design/SKILL.md) | Design behavioral Python tests with isolated fixtures, explicit parametrization, and minimal runner extensions. |
